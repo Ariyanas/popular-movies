@@ -11,13 +11,13 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClient {
-    private static final String BASE_URL = "https://api.themoviedb.org/3/movie";
+    private static final String BASE_URL = "https://api.themoviedb.org/3/movie/";
 
-    private static String MOVIEDB_API_KEY = System.getProperty("MOVIEDB_API_KEY");
+//    private static String MOVIEDB_API_KEY = System.getProperty("MOVIEDB_API_KEY");
 
     private static Retrofit retrofitClient = null;
 
-    static Retrofit getClient() {
+    public static Retrofit getClient() {
         OkHttpClient httpClient = new OkHttpClient.Builder()
                 .addInterceptor(new Interceptor() {
                     @Override
@@ -27,7 +27,7 @@ public class RetrofitClient {
                         HttpUrl reqUrl = request.url();
 
                         HttpUrl newUrl = reqUrl.newBuilder()
-                            .addQueryParameter("api_key", MOVIEDB_API_KEY)
+                            .addQueryParameter("api_key", "28d112b749a241baa87689b893bd338e")
                             .addQueryParameter("language", "en-US")
                             .build();
 
