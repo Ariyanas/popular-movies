@@ -60,9 +60,16 @@ public class MovieDetailsActivity extends AppCompatActivity {
         if (movie != null) {
             TextView tvTitle = (TextView) findViewById(R.id.tv_md_title);
             TextView tvOverview = (TextView) findViewById(R.id.tv_md_overview);
+            TextView tvReleaseDate = (TextView) findViewById(R.id.tv_md_release_date);
+            TextView tvRating = (TextView) findViewById(R.id.tv_md_rating);
+            TextView tvVoteCount = (TextView) findViewById(R.id.tv_md_votes);
+
             ImageView imgMoviePoster = (ImageView) findViewById(R.id.img_md_poster);
 
             tvTitle.setText(movie.title);
+            tvReleaseDate.setText(movie.releaseDate);
+            tvRating.setText("" + movie.voteAverage);
+            tvVoteCount.setText(movie.voteCount + " Votes");
             tvOverview.setText(movie.overview);
 
             ImageUtil.loadImage(imgMoviePoster, movie.posterPath);

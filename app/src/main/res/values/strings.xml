@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">Popular Movies</string>
-    <string name="text_overview">Overview</string>
+    <string name="lbl_md_overview">Overview</string>
+    <string name="lbl_md_cast">Movie Cast</string>
+    <string name="tv_md_title">Movie Title</string>
+    <string name="tv_md_overview">movie Overview description</string>
+    <string name="tv_md_release_date">Release Date</string>
+    <string name="tv_md_vote">Vote Count</string>
+    <string name="tv_md_rating">5.0</string>
+    <string name="img_md_poster">TODO</string>
 </resources>
