@@ -17,6 +17,7 @@ import java.util.List;
 
 import dev.ariyanas.popularmovies.R;
 import dev.ariyanas.popularmovies.models.Movie;
+import dev.ariyanas.popularmovies.utils.ImageUtil;
 
 public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.MovieViewHolder
         > {
@@ -25,8 +26,6 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
     private List<Movie> movies;
 
     private OnMovieItemListener movieItemListener;
-
-    final String BASE_POSTER_PATH = "https://image.tmdb.org/t/p/w220_and_h330_face";
 
     public MovieListAdapter(Context mctx, List<Movie> movieData, OnMovieItemListener listener) {
         this.mContext = mctx;
@@ -50,9 +49,7 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
     public void onBindViewHolder(@NonNull MovieViewHolder holder, int position) {
         String imgPath = this.movies.get(position).posterPath;
 
-        Picasso.get().load(this.BASE_POSTER_PATH + imgPath)
-                .fit().centerCrop()
-                .into(holder.imgMoviePoster);
+        ImageUtil.loadImage(holder.imgMoviePoster, imgPath);
 
         holder.tvMovieTitle.setText(this.movies.get(position).title);
     }

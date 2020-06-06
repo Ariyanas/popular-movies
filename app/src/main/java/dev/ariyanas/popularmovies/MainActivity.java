@@ -25,7 +25,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity implements MovieListAdapter.OnMovieItemListener {
-    public MovieService movieService;
+    public static MovieService movieService;
     private Context ctx;
 
     private static List<Movie> movies = new ArrayList<>();
@@ -77,11 +77,11 @@ public class MainActivity extends AppCompatActivity implements MovieListAdapter.
 
     @Override
     public void onMovieItemClick(int position) {
-        Toast.makeText(this, "Movie clicked : " + position, Toast.LENGTH_SHORT).show();
-
         Movie movie = movies.get(position);
 
         Intent intent = new Intent(this, MovieDetailsActivity.class);
+
+        intent.putExtra("MOVIE_ID", movie.id);
 
         startActivity(intent);
     }

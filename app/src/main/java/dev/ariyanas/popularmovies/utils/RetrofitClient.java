@@ -2,6 +2,7 @@ package dev.ariyanas.popularmovies.utils;
 
 import java.io.IOException;
 
+import dev.ariyanas.popularmovies.BuildConfig;
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -13,7 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitClient {
     private static final String BASE_URL = "https://api.themoviedb.org/3/movie/";
 
-//    private static String MOVIEDB_API_KEY = System.getProperty("MOVIEDB_API_KEY");
+    private static String MOVIEDB_API_KEY = BuildConfig.MOVIEDB_API_KEY;
 
     private static Retrofit retrofitClient = null;
 
@@ -27,7 +28,7 @@ public class RetrofitClient {
                         HttpUrl reqUrl = request.url();
 
                         HttpUrl newUrl = reqUrl.newBuilder()
-                            .addQueryParameter("api_key", "28d112b749a241baa87689b893bd338e")
+                            .addQueryParameter("api_key", MOVIEDB_API_KEY)
                             .addQueryParameter("language", "en-US")
                             .build();
 

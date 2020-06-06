@@ -3,7 +3,7 @@ package dev.ariyanas.popularmovies.models;
 import com.google.gson.annotations.SerializedName;
 
 public class Movie {
-    public int id;
+    public String id;
 
     @SerializedName("poster_path")
     public String posterPath = null;
