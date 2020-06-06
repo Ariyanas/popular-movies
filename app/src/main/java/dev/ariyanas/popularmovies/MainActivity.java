@@ -1,5 +1,6 @@
 package dev.ariyanas.popularmovies;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -9,6 +10,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -39,10 +42,10 @@ public class MainActivity extends AppCompatActivity implements MovieListAdapter.
 
         movieService = RetrofitClient.getClient().create(MovieService.class);
 
-        getMovieList();
+        getPopularMovieList();
     }
-    
-    private void getMovieList() {
+
+    private void getPopularMovieList() {
         Call<MovieList> movieRequest = movieService.getPopularMovies();
         
         movieRequest.enqueue(new Callback<MovieList>() {
@@ -53,8 +56,27 @@ public class MainActivity extends AppCompatActivity implements MovieListAdapter.
                 movies = movieListResponse.getMovies();
 
                 populateUI();
+            }
 
-                Log.d("MVIE", movieListResponse.getMovies().toString());
+            @Override
+            public void onFailure(Call<MovieList> call, Throwable t) {
+                Toast.makeText(ctx, "Failed to Fetch movies", Toast.LENGTH_SHORT).show();
+                call.cancel();
+            }
+        });
+    }
+
+    private void getTopRatedMovieList() {
+        Call<MovieList> movieRequest = movieService.getTopRatedMovies();
+
+        movieRequest.enqueue(new Callback<MovieList>() {
+            @Override
+            public void onResponse(Call<MovieList> call, Response<MovieList> response) {
+                MovieList movieListResponse = response.body();
+
+                movies = movieListResponse.getMovies();
+
+                populateUI();
             }
 
             @Override
@@ -73,6 +95,29 @@ public class MainActivity extends AppCompatActivity implements MovieListAdapter.
 
         rvMovieList.setLayoutManager(new GridLayoutManager(this, 2));
         rvMovieList.setAdapter(movieListAdapter);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.sort_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int mnuItem = item.getItemId();
+
+        switch (mnuItem) {
+            case R.id.mi_by_popular:
+                getPopularMovieList();
+                break;
+            case R.id.mi_by_top_rated:
+                getTopRatedMovieList();
+                break;
+            default: break;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

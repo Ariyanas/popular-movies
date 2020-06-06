@@ -8,4 +8,7 @@
     <string name="tv_md_vote">Vote Count</string>
     <string name="tv_md_rating">5.0</string>
     <string name="img_md_poster">TODO</string>
+    <string name="mi_label_sort_by">Sort By</string>
+    <string name="mi_by_popular">By Popularity</string>
+    <string name="mi_by_top_rated">By Top Rated</string>
 </resources>
